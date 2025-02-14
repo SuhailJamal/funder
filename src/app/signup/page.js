@@ -1,3 +1,6 @@
+"use client"
+import { useSession,signIn, signOut } from "next-auth/react"
+import { useRouter } from "next/navigation"
 const signup = ()=>{
     return (
         <>
@@ -46,7 +49,9 @@ const signup = ()=>{
                                     </svg>
                                     Continue with Google
                                 </button>
-                                <button type="button"
+                                <button type="button" onClick={async ()=>{
+                                    await signIn("github")
+                                }}
                                         className="px-4 py-2.5 flex items-center justify-center rounded-md text-white text-sm tracking-wider border-none outline-none bg-black hover:bg-[#222]">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22px" fill="#fff"
                                          className="inline shrink-0 mr-3" viewBox="0 0 22.773 22.773">

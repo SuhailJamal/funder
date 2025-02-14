@@ -1,3 +1,4 @@
+import { signIn } from "next-auth/react";
 const login = ()=>{
     return(
         <>
