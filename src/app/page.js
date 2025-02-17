@@ -1,10 +1,19 @@
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
-import Image from "next/image";
+import HeroSection from "@/components/HeroSection/HeroSection";
+import Testimonials from "@/components/Testimonials/Testimonials";
+import MeetOurTeam from "@/components/MeetOurTeam/MeetOurTeam";
+import Features from "@/components/Features/Features";
+import Newsletter from "@/components/Newsletter/Newsletter";
+import Stats from "@/components/Stats/Stats";
 
 export default function Home() {
   return (
-    <><h1 className="text-blue-500">Hello World</h1>
+    <>
+      <HeroSection />
+      <Features />
+      <Stats />
+      <Testimonials />
+      <MeetOurTeam />
+      <Newsletter />
     </>
-    
   );
 }

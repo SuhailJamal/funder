@@ -1,3 +1,4 @@
+"use client"
 import { signIn } from "next-auth/react";
 const login = ()=>{
     return(
@@ -97,7 +98,9 @@ const login = ()=>{
                                               data-original="#ffffff"/>
                                     </svg>
                                 </button>
-                                <button type="button"
+                                <button type="button" onClick={async ()=>{
+                                    await signIn("github")
+                                }}
                                         className="border-none outline-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 22.773 22.773">
                                         <path
