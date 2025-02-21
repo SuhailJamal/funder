@@ -1,6 +1,16 @@
 "use client"
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { handleLoginForm } from "../actions";
+import { useRouter } from "next/navigation";
+
 const login = ()=>{
+
+    const {data : session ,status} = useSession();
+    if(status === "authenticated") {
+        const router = useRouter();
+        router.push(`/user/${session.user.email}`)
+    }
+
     return(
         <>
             <div className="font-[sans-serif]">
@@ -17,7 +27,7 @@ const login = ()=>{
                                 here</a></p>
                         </div>
 
-                        <form className="max-w-md md:ml-auto w-full">
+                        <form className="max-w-md md:ml-auto w-full" action={handleLoginForm}>
                             <h3 className="text-gray-800 text-3xl font-extrabold mb-8">
                                 Sign in
                             </h3>
@@ -51,7 +61,7 @@ const login = ()=>{
                             </div>
 
                             <div className="!mt-8">
-                                <button type="button"
+                                <button type="submit"
                                         className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
                                     Log in
                                 </button>

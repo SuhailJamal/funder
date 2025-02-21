@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 const Navbar = () => {
   const { data: session } = useSession();
 
@@ -82,7 +83,20 @@ const Navbar = () => {
             >
               <Link href="/">Home</Link>
             </li>
+            
+          {session && (<>
             <li>
+              <Link
+                href={`/user/${session.user.email}`}
+                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              >
+                Profile
+              </Link>
+            </li>
+
+          </>)}
+            {!session && (<>
+              <li>
               <Link
                 href="/about"
                 className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
@@ -90,7 +104,7 @@ const Navbar = () => {
                 About
               </Link>
             </li>
-            <li>
+              <li>
               <a
                 href="#"
                 className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
@@ -106,6 +120,7 @@ const Navbar = () => {
                 Contact
               </Link>
             </li>
+            </>)}
           </ul>
         </div>
       </div>
