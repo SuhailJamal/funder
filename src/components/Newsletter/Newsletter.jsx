@@ -1,11 +1,11 @@
 const Newsletter = ()=>{
     return(
         <>
-        <div className="bg-gradient-to-r from-gray-200 via-gray-50 to-gray-200 py-16 mt-5 mb-5">
+        <div className="bg-slate-200 py-16 mt-5 mb-5 dark:bg-gray-800 dark:text-white">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 p-4">
         <div className="w-full text-center lg:text-left">
-          <h2 className="text-gray-800 text-5xl font-extrabold mb-6">Stay Updated</h2>
-          <p className="text-lg text-gray-600">Subscribe to our newsletter for the latest updates, tips, and exclusive offers.</p>
+          <h2 className="text-gray-800 text-5xl font-extrabold mb-6 dark:text-white">Stay Updated</h2>
+          <p className="text-lg text-gray-600 dark:text-white">Subscribe to our newsletter for the latest updates, tips, and exclusive offers.</p>
         </div>
 
         <div className="w-full max-lg:max-w-lg">

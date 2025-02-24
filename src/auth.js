@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import prisma from "./lib/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -11,6 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
+      id : "credentials",
       name: "Credentials",
       // `credentials` is used to generate a form on the sign in page.
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
@@ -22,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const user = await prisma.User.findOne({
+        const user = await prisma.User.findUnique({
           where : {
             email : credentials.email
           }
@@ -30,14 +33,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
-          return user
-        }
-        if(!user.verified){
-          throw new error("Verify your account first")
+          return user;
         }
         else {
           // If you return null then an error will be displayed advising the user to check their details.
-          throw new error("No user found");
+          return null;
   
           // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }

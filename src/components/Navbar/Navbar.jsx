@@ -2,8 +2,19 @@
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { faMoon } from "@fortawesome/free-regular-svg-icons";
+import { IoMoon } from "react-icons/io5";
+import { IoSunny } from "react-icons/io5";
+import { IconContext } from "react-icons";
 const Navbar = () => {
   const { data: session } = useSession();
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle("dark");
+  };
 
   return (
     <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600">
@@ -21,32 +32,49 @@ const Navbar = () => {
             Funder
           </span>
         </Link>
+
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {!session && <Link href="/login">
-            <button
-              type="button"
-              className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-            >
-              Login
-            </button>
-          </Link>}
-          {!session && <Link href="/signup">
-            <button
-              type="button"
-              className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-            >
-              Signup
-            </button>
-          </Link>}
+          {!session && (
+            <Link href="/login">
+              <button
+                type="button"
+                className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              >
+                Login
+              </button>
+            </Link>
+          )}
+          {!session && (
+            <Link href="/signup">
+              <button
+                type="button"
+                className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              >
+                Signup
+              </button>
+            </Link>
+          )}
 
           {/* {session && <p className="text-white">Welcome {session.user.email}</p>} */}
-          {session && <button
+          {session && (
+            <button
               type="button"
               className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              onClick={async()=>signOut()}
+              onClick={async () => signOut()}
             >
               Logout
-            </button>}
+            </button>
+          )}
+          <button
+            onClick={toggleDarkMode}
+            className="px-3 py-2.5 me-2 mb-2 rounded-lg transition-all hover:bg-gray-200 dark:hover:bg-gray-700"
+          >
+            {darkMode ? (
+              <IoSunny className="text-xl md:text-2xl" />
+            ) : (
+              <IoMoon className="text-xl md:text-2xl" />
+            )}
+          </button>
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
@@ -72,6 +100,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
+
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-sticky"
@@ -83,47 +112,52 @@ const Navbar = () => {
             >
               <Link href="/">Home</Link>
             </li>
-            
-          {session && (<>
-            <li>
-              <Link
-                href={`/user/${session.user.email}`}
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Profile
-              </Link>
-            </li>
 
-          </>)}
-            {!session && (<>
-              <li>
-              <Link
-                href="/about"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                About
-              </Link>
-            </li>
-              <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Services
-              </a>
-            </li>
-            <li>
-              <Link
-                href="contact"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Contact
-              </Link>
-            </li>
-            </>)}
+            {session && (
+              <>
+                <li>
+                  <Link
+                    href={`/user/${session.user.email}`}
+                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Profile
+                  </Link>
+                </li>
+              </>
+            )}
+            {!session && (
+              <>
+                <li>
+                  <Link
+                    href="/about"
+                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    href="contact"
+                    className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
+
+      <div className="bg-yellow-100 dark:bg-blue-900"></div>
     </nav>
   );
 };

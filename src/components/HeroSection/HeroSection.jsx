@@ -5,7 +5,7 @@ const HeroSection = () => {
         <div className="relative overflow-hidden">
           <div className="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:py-32 lg:px-8">
             <div className="relative z-10 text-center lg:text-left">
-              <h1 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl lg:text-7xl">
+              <h1 className="text-4xl dark:text-white tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl lg:text-7xl">
                 Welcome to
                 <br className="xl:hidden" />
                 <span className="text-indigo-400"> Premium Delights</span>
