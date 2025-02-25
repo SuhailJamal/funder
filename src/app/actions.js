@@ -1,23 +1,7 @@
 "use server";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
-export async function handleLoginForm(formData) {
-  try {
-    const existingUser = await prisma.User.findOne({
-      where: {
-        email: formData.get("email"),
-      },
-    });
-
-    if (!existingUser) {
-      return false;
-    } else {
-      return true;
-    }
-  } catch (e) {
-    console.log("Error while signing in the user : ", e);
-  }
-}
+import bcrypt from "bcryptjs";
 export async function handleSignUp(formData) {
   const user = await prisma.User.findUnique({
     where: {
@@ -28,16 +12,17 @@ export async function handleSignUp(formData) {
     redirect("/login");
   }
   try {
+    const hashedPassword = await bcrypt.hash(formData.get("password"), 10);
     const newUser = await prisma.User.create({
       data: {
         name: `${formData.get("firstname")} ${formData.get("lastname")}`,
         email: formData.get("email"),
-        password: formData.get("password"),
+        password:hashedPassword
       },
     });
-    redirect("/login");
   } catch (e) {
     console.error("Error while connecting to the database:", e);
     redirect("/404");
   }
+  redirect('/login');
 }

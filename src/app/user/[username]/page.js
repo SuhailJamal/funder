@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 
 const UserLanding = async ({ params }) => {
- const username = decodeURIComponent(await params.username);;
+ const username = decodeURIComponent(await (params).username);;
 const user = await prisma.User.findUnique({
   where : {
     email : username.toLowerCase()

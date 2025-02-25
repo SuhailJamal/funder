@@ -3,7 +3,7 @@ import GitHub from "next-auth/providers/github";
 import prisma from "./lib/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -31,9 +31,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
         })
   
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
+        if (user) { 
+          const isMatch = await bcrypt.compare(credentials.password, user.password);
+          return isMatch? user : null;
+         
         }
         else {
           // If you return null then an error will be displayed advising the user to check their details.
