@@ -20,5 +20,5 @@ model User {
   profileImage String? @default("")
   bannerImage  String? @default("")
   createdAt    DateTime @default(now())
-  password     String?  @default("defaultpassword")
+  password     String?  @default("")
 }

@@ -3,10 +3,8 @@ import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { faMoon } from "@fortawesome/free-regular-svg-icons";
 import { IoMoon } from "react-icons/io5";
 import { IoSunny } from "react-icons/io5";
-import { IconContext } from "react-icons";
 const Navbar = () => {
   const { data: session } = useSession();
   const [darkMode, setDarkMode] = useState(false);

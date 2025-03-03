@@ -1,4 +1,3 @@
-"use server";
 import UserProfile from "@/components/UserProfile/UserProfile";
 import SupportAndPayment from "@/components/SupportAndPayment/SupportAndPayment";
 import prisma from "@/lib/prisma";

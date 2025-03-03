@@ -78,14 +78,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.email = user.email;
         token.name = user.name;
         token.username = user.username;
-        token.password = user.password;
-        token.title = user.title;
-        token.bio = user.bio;
-        token.location = user.location;
-        token.linkedin = user.linkedin;
-        token.github = user.github;
-        token.profileImage = user.profileImage;
-        token.bannerImage = user.bannerImage;
       }
       return token; 
     },
@@ -93,16 +85,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.email = token.email;
       session.user.name = token.name;
       session.user.username = token.username;
-      session.user.password = token.password;
-      session.user.title = token.title;
-      session.user.bio = token.bio;
-      session.user.title = token.title;
-      session.user.bio = token.bio;
-      session.user.location = token.location;
-      session.user.linkedin = token.linkedin;
-      session.user.github = token.github;
-      session.user.profileImage = token.profileImage;
-      session.user.bannerImage = token.bannerImage;
       return session;
     }
   },

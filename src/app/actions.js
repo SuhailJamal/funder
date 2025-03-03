@@ -1,6 +1,7 @@
 "use server";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth"
 import bcrypt from "bcryptjs";
 export async function handleSignUp(formData) {
   const user = await prisma.User.findUnique({
@@ -72,12 +73,12 @@ export async function handleEditForm(formData) {
       data: updateData,
     });
 
-    console.log("User updated successfully!");
+    console.log(`User updated successfully! with email ${email}`);
 
   } catch (error) {
     console.error("Error while updating user:", error);
     return redirect("/404");
   }
 
-  return redirect(`/user/${email}`);
+  return redirect(`/user/${email}`)
 }
