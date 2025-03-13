@@ -22,3 +22,14 @@ model User {
   createdAt    DateTime @default(now())
   password     String?  @default("")
 }
+
+model Donation{
+  id Int @id @default(autoincrement())
+  donar_name String @default("")
+  receiver_name String @default("")
+  donated_at DateTime @default(now())
+  receiver_image String? @default("")
+  donar_image String? @default("")
+  donation_amount Int @default(0)
+  donation_message String @default("")
+}
