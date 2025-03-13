@@ -24,11 +24,10 @@ model User {
 }
 
 model Donation{
-  id Int @id @default(autoincrement())
+  id String @id @map("_id") @db.ObjectId @default(auto())
   donar_name String @default("")
   receiver_name String @default("")
-  donated_at DateTime @default(now())
-  receiver_image String? @default("")
+  donated_at DateTime @default(now()) 
   donar_image String? @default("")
   donation_amount Int @default(0)
   donation_message String @default("")

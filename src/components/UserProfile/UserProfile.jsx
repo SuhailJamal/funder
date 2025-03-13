@@ -11,12 +11,13 @@ const UserProfile = ({ userData }) => {
     if (status === "loading") return;
     if (session.user.email == userData.email) setIsSameUser(true);
   }, [session, isSameUser]);
-
-  if (status == "loading") return "<p>Loading...</p>";
+if (status === "loading") return "<p>loading</p>"
+console.log("session user email is ", session.user.email)
+console.log("user data email is ",userData.email)
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className=" bg-gray-50">
         <div className="relative">
           <div className="w-full h-[40vh] md:h-[50vh] overflow-hidden">
             <img

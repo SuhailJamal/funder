@@ -8,7 +8,7 @@ const UserLanding = async ({ params }) => {
   const username = decodeURIComponent(dataParams.username);
   const user = await prisma.User.findUnique({
     where: {
-      email: username.toLowerCase(),
+      email: username.toLowerCase()
     },
   });
   if (!user) {
@@ -27,11 +27,21 @@ const UserLanding = async ({ params }) => {
     profileImage: user.profileImage,
     bannerImage: user.bannerImage,
   };
+  const donation = await prisma.Donation.findMany({
+    where : {
+      receiver_name : user.name
+    },
+    orderBy : {
+      donated_at : "desc"
+    },
+    take : 3
+  })
+
 
   return (
     <>
       <UserProfile userData = { data } />
-      <SupportAndPayment />
+      <SupportAndPayment donation = {donation} />
     </>
   );
 };
