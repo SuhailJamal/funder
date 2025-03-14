@@ -1,11 +1,9 @@
 "use server";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
-import { auth } from "@/auth";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 export async function handleSignUp(formData) {
-  console.log(formData);
   console.log("the user data email is ", formData.get("email"));
   const user = await prisma.User.findUnique({
     where: {
