@@ -4,12 +4,16 @@ import prisma from "./lib/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
-
+import GoogleProvider from 'next-auth/providers/google'
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -45,22 +49,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
     })
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "google" || account.provider === "github") {
+        console.log("user is ", user,"account is ",account)
         try {
           const existingUser = await prisma.User.findUnique({
             where: { email: user.email },
           });
-  
+    
+          console.log("Existing User:", existingUser);
+    
           if (!existingUser) {
+            console.log("Creating New User...");
+            const username = user.email.split("@")[0]
             await prisma.User.create({
               data: {
                 email: user.email,
-                name: user.name,
+                name: user.name || "NULL",
+                username : username
               },
             });
           }
+    
+          console.log("Sign-in Allowed ✅");
           return true; // Allow sign-in
         } catch (e) {
           console.error("Error while connecting to the database:", e);
