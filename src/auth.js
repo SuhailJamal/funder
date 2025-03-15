@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import prisma from "./lib/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 import GoogleProvider from 'next-auth/providers/google'
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -37,6 +36,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   
         if (user) { 
           const isMatch = await bcrypt.compare(credentials.password, user.password);
+          
           return isMatch? user : null;
          
         }
@@ -80,7 +80,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return false; // Block sign-in on error
         }
       }
-  
       return true; // Allow sign-in for other providers
     },
     async redirect({ url, baseUrl ,user }) {

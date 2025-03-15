@@ -1,10 +1,10 @@
 "use server";
+import transporter from "@/lib/nodemailer";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 export async function handleSignUp(formData) {
-  console.log("the user data email is ", formData.get("email"));
   const user = await prisma.User.findUnique({
     where: {
       email: formData.get("email"),
@@ -28,6 +28,92 @@ export async function handleSignUp(formData) {
       email: email,
       password: hashedPassword,
     },
+  });
+  const welcomeEmailHTML = (userName) => `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Funder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        .content {
+            padding: 20px;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+        }
+        .btn {
+            display: inline-block;
+            background: #6a11cb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .btn:hover {
+            background: #2575fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to Funder, ${userName}!</h1>
+        </div>
+        <div class="content">
+            <p>Thank you for signing up with <b>Funder</b>! 🎉</p>
+            <p>We are thrilled to have you on board. You can now start creating and supporting fundraisers to make a real impact.</p>
+            <p>Here’s what you can do next:</p>
+            <ul>
+                <li>✔️ Set up your profile and fundraising goals.</li>
+                <li>✔️ Explore and support fundraisers that inspire you.</li>
+                <li>✔️ Share your campaign to reach more supporters.</li>
+            </ul>
+            
+        </div>
+        <div class="footer">
+            <p>If you have any questions, feel free to reach out to us at <a href="mailto:support@funder.com">support@funder.com</a></p>
+            <p>Best Regards, <br> The Funder Team</p>
+        </div>
+    </div>
+</body>
+</html>
+`;
+  await transporter.sendMail({
+    from: '"Funder" <erenyeager58.sj@gmail.com>', // sender address
+    to: email, // list of receivers
+    subject: `Welcome to Funder ${name}`, // Subject line
+    html: welcomeEmailHTML(name), // html body
   });
 
   redirect("/login");
@@ -73,7 +159,7 @@ export async function handleEditForm(formData) {
       updateData.password = await bcrypt.hash(newPassword, 10);
     }
 
-    await prisma.user.update({
+    await prisma.User.update({
       where: { email },
       data: updateData,
     });
@@ -118,4 +204,28 @@ export async function handlePaymentForm(formData) {
     },
   });
   revalidatePath(`/user/${receiverEmail}`);
+}
+export async function handleContactForm(formData) {
+  const email = formData.get("email");
+  const firstName = formData.get("firstName");
+  const subject = formData.get("subject");
+  const emailHTML = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #f9f9f9;">
+      <h2 style="color: #4A90E2; text-align: center;">Thank You for Contacting Funder!</h2>
+      <p>Dear <strong>${firstName}</strong>,</p>
+      <p>We have received your request regarding <strong>"${subject}"</strong>. Our team will review your inquiry and get back to you as soon as possible.</p>
+      <p>If you have any urgent concerns, feel free to reach out to us directly.</p>
+      <p style="text-align: center; margin-top: 20px;"><strong>Best Regards,</strong></p>
+      <p style="text-align: center; color: #555;">The Funder Team</p>
+      <hr>
+      <p style="font-size: 12px; text-align: center; color: #888;">This is an automated message. Please do not reply.</p>
+    </div>
+  `;
+  const info = await transporter.sendMail({
+    from: '"Funder Support" <erenyeager58.sj@gmail.com>', // sender address
+    to: email, // list of receivers
+    subject: `Acknowledgment: ${subject}`, // Subject line
+    html: emailHTML, // html body
+  });
+  console.log("Message sent with id", info.messageId);
 }

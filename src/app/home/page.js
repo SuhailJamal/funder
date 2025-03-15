@@ -1,4 +1,4 @@
-const Home = ()=>{
+const Home = async ()=>{
     return(<>
     Hello i am home page
     </>)
