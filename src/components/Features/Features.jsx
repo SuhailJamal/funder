@@ -1,8 +1,8 @@
 const Features = ()=>{
     return (
         <>
-        <div className="max-w-6xl mx-auto mt-5">
-      <h2 className="text-gray-800 sm:text-4xl text-2xl font-extrabold text-center mb-16">Discover Our Exclusive Features</h2>
+        <div className="w-full mx-auto pt-5 px-10 pb-5 dark:bg-slate-900">
+      <h2 className="text-gray-800 dark:text-slate-100 sm:text-4xl text-2xl font-extrabold text-center mb-16">Discover Our Features</h2>
 
       <div className="grid lg:grid-cols-3 md:grid-cols-2 max-md:max-w-lg mx-auto gap-12">
         <div className="p-4 flex gap-6 rounded-lg hover:shadow-md hover:scale-105 transition-all duration-300">
@@ -11,8 +11,8 @@ const Features = ()=>{
             <path d="M16 9a7 7 0 1 0 7 7 7.008 7.008 0 0 0-7-7Zm0 12a5 5 0 1 1 5-5 5.006 5.006 0 0 1-5 5Z" data-original="#000000" />
           </svg>
           <div>
-            <h3 className="text-gray-800 text-xl font-semibold mb-3">Customization</h3>
-            <p className="text-gray-600 text-sm">Tailor our product to suit your needs Expand your reach with our global network.</p>
+            <h3 className="text-gray-800 text-xl dark:text-slate-200 font-semibold mb-3">Fundraising Campaigns</h3>
+            <p className="text-gray-600 dark:text-slate-300 text-sm">Easily set up and publish fundraising posts to raise money for personal, medical, educational, or social causes.</p>
           </div>
         </div>
 
@@ -29,8 +29,8 @@ const Features = ()=>{
             </g>
           </svg>
           <div>
-            <h3 className="text-gray-800 text-xl font-semibold mb-3">Security</h3>
-            <p className="text-gray-600 text-sm">Your data is protected by the latest security measures.</p>
+            <h3 className="text-gray-800 text-xl dark:text-slate-200 font-semibold mb-3">Secure Donations </h3>
+            <p className="text-gray-600 dark:text-slate-300 text-sm">Supporters can donate safely through a secure and seamless payment system.</p>
           </div>
         </div>
 
@@ -39,8 +39,8 @@ const Features = ()=>{
             <path d="M271.029 0c-33.091 0-61 27.909-61 61s27.909 61 61 61 60-27.909 60-61-26.909-61-60-61zm66.592 122c-16.485 18.279-40.096 30-66.592 30-26.496 0-51.107-11.721-67.592-30-14.392 15.959-23.408 36.866-23.408 60v15c0 8.291 6.709 15 15 15h151c8.291 0 15-6.709 15-15v-15c0-23.134-9.016-44.041-23.408-60zM144.946 460.404 68.505 307.149c-7.381-14.799-25.345-20.834-40.162-13.493l-19.979 9.897c-7.439 3.689-10.466 12.73-6.753 20.156l90 180c3.701 7.423 12.704 10.377 20.083 6.738l19.722-9.771c14.875-7.368 20.938-25.417 13.53-40.272zM499.73 247.7c-12.301-9-29.401-7.2-39.6 3.9l-82 100.8c-5.7 6-16.5 9.6-22.2 9.6h-69.901c-8.401 0-15-6.599-15-15s6.599-15 15-15h60c16.5 0 30-13.5 30-30s-13.5-30-30-30h-78.6c-7.476 0-11.204-4.741-17.1-9.901-23.209-20.885-57.949-30.947-93.119-22.795-19.528 4.526-32.697 12.415-46.053 22.993l-.445-.361-21.696 19.094L174.28 452h171.749c28.2 0 55.201-13.5 72.001-36l87.999-126c9.9-13.201 7.2-32.399-6.299-42.3z" data-original="#000000" />
           </svg>
           <div>
-            <h3 className="text-gray-800 text-xl font-semibold mb-3">Support</h3>
-            <p className="text-gray-600 text-sm">Tailor our product to suit your needs 24/7 customer support for all your inquiries.</p>
+            <h3 className="text-gray-800 text-xl font-semibold mb-3 dark:text-slate-200">Support</h3>
+            <p className="text-gray-600 text-sm dark:text-slate-300">Tailor our product to suit your needs 24/7 customer support for all your inquiries.</p>
           </div>
         </div>
 
@@ -53,8 +53,8 @@ const Features = ()=>{
             </g>
           </svg>
           <div>
-            <h3 className="text-gray-800 text-xl font-semibold mb-3">Performance</h3>
-            <p className="text-gray-600 text-sm">Experience blazing-fast performance with our product.</p>
+            <h3 className="text-gray-800 text-xl font-semibold mb-3 dark:text-slate-200">User Profiles</h3>
+            <p className="text-gray-600 text-sm dark:text-slate-300">Every user gets a personalized profile page displaying their campaigns and donation history.</p>
           </div>
         </div>
 
@@ -69,8 +69,8 @@ const Features = ()=>{
             <path d="M494.359 499.947c-.155 0-.315-.005-.47-.01l-66.757-3.042c-5.702-.263-10.108-5.088-9.85-10.79.263-5.702 5.113-9.984 10.79-9.85l55.219 2.515-3.641-55.332c-.372-5.692 3.941-10.609 9.633-10.986 5.625-.398 10.609 3.946 10.986 9.633l4.401 66.85a10.33 10.33 0 0 1-2.929 7.902 10.323 10.323 0 0 1-7.382 3.11z" data-original="#000000" />
           </svg>
           <div>
-            <h3 className="text-gray-800 text-xl font-semibold mb-3">Global Reach</h3>
-            <p className="text-gray-600 text-sm">Tailor our product to suit your needs Expand your reach with our global network.</p>
+            <h3 className="text-gray-800 text-xl font-semibold dark:text-slate-200 mb-3">Support Causes</h3>
+            <p className="text-gray-600 text-sm dark:text-slate-300">Discover and contribute to fundraisers that align with your interests and values.</p>
           </div>
         </div>
 
@@ -86,8 +86,8 @@ const Features = ()=>{
             </g>
           </svg>
           <div>
-            <h3 className="text-gray-800 text-xl font-semibold mb-3">Communication</h3>
-            <p className="text-gray-600 text-sm">Tailor our product to suit your needs Seamless communication for your team.</p>
+            <h3 className="text-gray-800 text-xl font-semibold mb-3 dark:text-slate-200">Donations Box</h3>
+            <p className="text-gray-600 text-sm dark:text-slate-300">See the latest donations you’ve received, keeping track of your supporters in real time.</p>
           </div>
         </div>
       </div>
