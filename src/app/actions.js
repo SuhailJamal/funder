@@ -229,3 +229,33 @@ export async function handleContactForm(formData) {
   });
   console.log("Message sent with id", info.messageId);
 }
+
+export async function handleHiringForm(formData){
+  console.log(formData)
+  const email = formData.get("email")
+  const interestedIn = formData.get("interestedIn")
+  const name = formData.get("name")
+  const message = formData.get("message")
+  const emailHTML = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+        <h2 style="color: #2c3e50; text-align: center;">🚀 Hiring Application Received!</h2>
+        <p>Hello <b>${name}</b>,</p>
+        <p>Thank you for your interest in joining <b>Funder</b>. We have received your application for the role of <b>${interestedIn}</b> and will review your submission.</p>
+        <h3 style="color: #3498db;">Your Submission Details:</h3>
+        <p><b>Role Applied For:</b> ${interestedIn}</p>
+        <p><b>Field of Interest:</b> ${interestedIn}</p>
+        <p><b>Your Message:</b> ${message}</p>
+        <hr>
+        <p>We appreciate your interest in working with us. Our team will get back to you as soon as possible.</p>
+        <p style="font-size: 14px; color: #555;">Best regards,</p>
+        <p style="font-size: 14px; color: #555;"><b>Funder Hiring Team</b></p>
+      </div>
+    `;
+
+    await transporter.sendMail({
+      from: '"Funder Hiring Team" <erenyeager58.sj@gmail.com>',
+      to: email,
+      subject: `📩 Hiring Application Received: ${interestedIn}`,
+      html: emailHTML,
+    })
+}

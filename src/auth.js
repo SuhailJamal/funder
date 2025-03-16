@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import GoogleProvider from 'next-auth/providers/google'
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret : process.env.NEXTAUTH_SECRET,
   providers: [
     GitHub({
       clientId: process.env.GITHUB_ID,
@@ -53,13 +54,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "google" || account.provider === "github") {
-        console.log("user is ", user,"account is ",account)
+        // console.log("user is ", user,"account is ",account)
         try {
           const existingUser = await prisma.User.findUnique({
             where: { email: user.email },
           });
-    
-          console.log("Existing User:", existingUser);
     
           if (!existingUser) {
             console.log("Creating New User...");
@@ -72,14 +71,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               },
             });
           }
-    
-          console.log("Sign-in Allowed ✅");
-          return true; // Allow sign-in
         } catch (e) {
           console.error("Error while connecting to the database:", e);
           return false; // Block sign-in on error
         }
       }
+      
+        const existingUser = await prisma.User.findUnique({
+          where : {
+            email : user.email
+          }
+        })
+        const userName  = existingUser.name || "Not Available"
+      
+      
+    await fetch(`${process.env.NEXTAUTH_URL}/api/sendMail`,{
+        method : 'POST',
+        headers : {'content-Type' : "application/json"},
+        body : JSON.stringify({email : user.email, name : userName})
+      })
       return true; // Allow sign-in for other providers
     },
     async redirect({ url, baseUrl ,user }) {
