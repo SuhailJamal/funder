@@ -230,12 +230,12 @@ export async function handleContactForm(formData) {
   console.log("Message sent with id", info.messageId);
 }
 
-export async function handleHiringForm(formData){
-  console.log(formData)
-  const email = formData.get("email")
-  const interestedIn = formData.get("interestedIn")
-  const name = formData.get("name")
-  const message = formData.get("message")
+export async function handleHiringForm(formData) {
+  console.log(formData);
+  const email = formData.get("email");
+  const interestedIn = formData.get("interestedIn");
+  const name = formData.get("name");
+  const message = formData.get("message");
   const emailHTML = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
         <h2 style="color: #2c3e50; text-align: center;">🚀 Hiring Application Received!</h2>
@@ -252,10 +252,36 @@ export async function handleHiringForm(formData){
       </div>
     `;
 
-    await transporter.sendMail({
-      from: '"Funder Hiring Team" <erenyeager58.sj@gmail.com>',
-      to: email,
-      subject: `📩 Hiring Application Received: ${interestedIn}`,
-      html: emailHTML,
-    })
+  await transporter.sendMail({
+    from: '"Funder Hiring Team" <erenyeager58.sj@gmail.com>',
+    to: email,
+    subject: `📩 Hiring Application Received: ${interestedIn}`,
+    html: emailHTML,
+  });
+}
+
+export async function handlePostCreateForm(formData) {
+  const title = formData.get("title");
+  const description = formData.get("description");
+  const category = formData.get("category");
+  const imageUrl = formData.get("imageUrl") || "";
+  const userEmail = formData.get("userEmail");
+  const user = await  prisma.User.findUnique({
+    where: {
+      email : userEmail
+    }
+  })
+  const userProfileImage = user.profileImage;
+  const userName = user.name || "Anonymous";
+  await prisma.Post.create({
+    data: {
+      title,
+      description,
+      category,
+      imageUrl,
+      userEmail,
+      userProfileImage,
+      userName
+    },
+  });
 }
