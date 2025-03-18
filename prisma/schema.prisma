@@ -17,8 +17,8 @@ model User {
   location     String? @default("")
   linkedin     String? @default("")
   github       String? @default("")
-  profileImage String? @default("")
-  bannerImage  String? @default("")
+  profileImage String? @default("https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg")
+  bannerImage  String? @default("https://images.unsplash.com/photo-1472289065668-ce650ac443d2")
   createdAt    DateTime @default(now())
   password     String?  @default("")
 }
@@ -28,7 +28,19 @@ model Donation{
   donar_name String @default("")
   receiver_name String @default("")
   donated_at DateTime @default(now()) 
-  donar_image String? @default("")
+  donar_image String? @default("https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg")
   donation_amount Int @default(0)
   donation_message String @default("")
+}
+
+model Post {
+  id          String   @id @map("_id") @db.ObjectId @default(auto())// MongoDB uses auto-generated ObjectId
+  title       String   // Campaign title
+  description String   // Campaign description
+  category    String   // Predefined category (e.g., Health, Education, etc.)
+  imageUrl    String?  @default("https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg") // Optional image URL 
+  userEmail   String   // Linking post to user email
+  createdAt   DateTime @default(now()) // Auto timestamp
+  userProfileImage String? 
+  userName String?
 }

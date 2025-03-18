@@ -25,7 +25,7 @@ const UserLanding = async ({ params }) => {
     linkedin: user.linkedin,
     github: user.github,
     profileImage: user.profileImage,
-    bannerImage: user.bannerImage,
+    bannerImage: user?.bannerImage || 'https://images.unsplash.com/photo-1472289065668-ce650ac443d2',
   };
   const donation = await prisma.Donation.findMany({
     where : {
