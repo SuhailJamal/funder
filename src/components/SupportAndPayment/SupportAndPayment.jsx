@@ -17,17 +17,17 @@ const SupportAndPayment =({donation}) => {
   if (status === "loading") return
  
   return (
-    <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gray-50 dark:bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Recent Support Messages */}
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Recent Support</h2>
+          <div className="bg-gray-300 dark:border dark:border-cyan-950 dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+            <h2 className="text-2xl font-bold dark:text-slate-100 text-gray-900 mb-6">Recent Support</h2>
             <div className="space-y-4 max-h-[600px] overflow-y-auto">
               {donation.map((support) => (
                 <div
                   key={support.id}
-                  className="bg-white rounded-lg p-4 shadow-sm transition-all hover:shadow-md"
+                  className="bg-white dark:bg-gray-900 rounded-lg p-4 shadow-sm transition-all hover:shadow-md"
                 >
                   <div className="flex items-center space-x-4">
                     <img
@@ -39,9 +39,9 @@ const SupportAndPayment =({donation}) => {
                       }}
                     />
                     <div className="flex-1">
-                      <h3 className="font-medium text-gray-900">{support.donar_name}</h3>
+                      <h3 className="font-medium dark:text-slate-300 text-gray-900">{support.donar_name}</h3>
                       <p className="text-green-600 font-semibold">${support.donation_amount}</p>
-                      <p className="text-gray-500 text-sm">{support.donation_message}</p>
+                      <p className="text-gray-500 dark:text-slate-400 text-sm">{support.donation_message}</p>
                      
                     </div>
                   </div>

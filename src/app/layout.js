@@ -1,16 +1,20 @@
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
+import { Poppins, Rubik } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
 import SessionWrapper from "@/components/SessionWrapper/SessionWrapper";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+
+const rubik = Rubik({
   subsets: ["latin"],
+  weight: "600",
+  variable: "--font-rubik",
+});
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins", // Optional: Define a CSS variable
 });
 
 export const metadata = {
@@ -23,7 +27,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <SessionWrapper>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.variable} ${rubik.variable} antialiased`}
       >
         
           <Navbar />

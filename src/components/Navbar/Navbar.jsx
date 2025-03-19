@@ -84,7 +84,7 @@ const Navbar = () => {
           {/* Dark Mode Toggle (Hidden on Mobile) */}
           <button
             onClick={toggleDarkMode}
-            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 dark:bg-gray-700"
           >
             {darkMode ? <IoSunny className="text-2xl" /> : <IoMoon className="text-2xl" />}
           </button>
@@ -119,7 +119,7 @@ const Navbar = () => {
               Home
             </Link>
             {session ? (
-              <Link href="/profile" className="text-gray-900 dark:text-white">
+              <Link href={`/user/${session.user.email}`} className="text-gray-900 dark:text-white">
                 Profile
               </Link>
             ) : (
