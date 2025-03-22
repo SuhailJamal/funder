@@ -47,7 +47,7 @@ const CreateCampaign = () => {
   // Reset image preview and collapse form after submission
 
   return (
-    <div className="w-full bg-white dark:bg-gray-800 py-5">
+    <div className="w-full bg-gray-50 dark:bg-gray-800 py-5">
       <div className="max-w-2xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
         {/* 🟢 Compact View (Profile Image + Placeholder + Create Post Button) */}
         {!expanded && (

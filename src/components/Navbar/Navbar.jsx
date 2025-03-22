@@ -14,7 +14,7 @@ const Navbar = () => {
     document.body.classList.toggle("dark");
   };
 
-  if(status === "loading") return
+  if (status === "loading") return;
   return (
     <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
@@ -33,7 +33,7 @@ const Navbar = () => {
         {/* Center - Navigation Links */}
         <div className="hidden md:flex space-x-6">
           <Link
-            href={session? "/home" : "/"}
+            href={session ? "/home" : "/"}
             className="text-gray-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-400"
           >
             Home
@@ -86,7 +86,11 @@ const Navbar = () => {
             onClick={toggleDarkMode}
             className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 dark:bg-gray-700"
           >
-            {darkMode ? <IoSunny className="text-2xl" /> : <IoMoon className="text-2xl" />}
+            {darkMode ? (
+              <IoSunny className="text-2xl" />
+            ) : (
+              <IoMoon className="text-2xl" />
+            )}
           </button>
         </div>
 
@@ -119,7 +123,10 @@ const Navbar = () => {
               Home
             </Link>
             {session ? (
-              <Link href={`/user/${session.user.email}`} className="text-gray-900 dark:text-white">
+              <Link
+                href={`/user/${session.user.email}`}
+                className="text-gray-900 dark:text-white"
+              >
                 Profile
               </Link>
             ) : (
@@ -127,7 +134,10 @@ const Navbar = () => {
                 <Link href="/about" className="text-gray-900 dark:text-white">
                   About
                 </Link>
-                <Link href="/services" className="text-gray-900 dark:text-white">
+                <Link
+                  href="/services"
+                  className="text-gray-900 dark:text-white"
+                >
                   Services
                 </Link>
                 <Link href="/contact" className="text-gray-900 dark:text-white">
@@ -163,7 +173,11 @@ const Navbar = () => {
               onClick={toggleDarkMode}
               className="w-full p-2 rounded-lg text-center bg-gray-200 dark:bg-gray-700"
             >
-              {darkMode ? <IoSunny className="text-2xl" /> : <IoMoon className="text-2xl" />}
+              {darkMode ? (
+                <IoSunny className="text-2xl" />
+              ) : (
+                <IoMoon className="text-2xl" />
+              )}
             </button>
           </ul>
         </div>
