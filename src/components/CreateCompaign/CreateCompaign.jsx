@@ -6,8 +6,6 @@ import Image from "next/image";
 import LoadingLogo from "../ui/LoadingLogo";
 import { handlePostCreateForm } from "@/app/actions";
 
-
-
 const CreateCampaign = () => {
   const { data: session, status } = useSession();
   const [expanded, setExpanded] = useState(false);
@@ -28,8 +26,17 @@ const CreateCampaign = () => {
   }
 
   const userEmail = session?.user?.email || "";
-  const userImage = session?.user?.profileImage || "https://st4.depositphotos.com/3557671/23892/v/450/depositphotos_238923408-stock-illustration-vector-illustration-of-avatar-and.jpg"
-  const CATEGORIES = ["Education", "Health", "Medical", "Disaster Relief", "Animal Welfare", "Other"];
+  const userImage =
+    session?.user?.profileImage ||
+    "https://st4.depositphotos.com/3557671/23892/v/450/depositphotos_238923408-stock-illustration-vector-illustration-of-avatar-and.jpg";
+  const CATEGORIES = [
+    "Education",
+    "Health",
+    "Medical",
+    "Disaster Relief",
+    "Animal Welfare",
+    "Other",
+  ];
 
   // Reset and open/close form
   const toggleExpanded = () => {
@@ -38,12 +45,10 @@ const CreateCampaign = () => {
   };
 
   // Reset image preview and collapse form after submission
- 
 
   return (
-    <div className="w-full bg-white dark:bg-gray-800 py-5">
+    <div className="w-full bg-gray-50 dark:bg-gray-800 py-5">
       <div className="max-w-2xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
-        
         {/* 🟢 Compact View (Profile Image + Placeholder + Create Post Button) */}
         {!expanded && (
           <div className="w-full flex items-center gap-3 py-3 px-4 bg-gray-200 dark:bg-gray-700 rounded-lg">
@@ -64,8 +69,8 @@ const CreateCampaign = () => {
             </span>
 
             {/* ➕ Create Post Button */}
-            <button 
-              onClick={toggleExpanded} 
+            <button
+              onClick={toggleExpanded}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 text-sm sm:text-base"
             >
               Create Post
@@ -102,7 +107,7 @@ const CreateCampaign = () => {
             )}
 
             {/* 📝 Form (Server Action) */}
-            <form 
+            <form
               action={handlePostCreateForm}
               className="space-y-4"
               onSubmit={() => setIsSubmitting(true)} // Set submitting state

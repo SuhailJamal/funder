@@ -10,8 +10,8 @@ const PaymentForm = () => {
     
     
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Support Us</h2>
+    <div className="bg-white dark:bg-gray-800 dark:border dark:border-cyan-950 rounded-xl p-6 shadow-lg">
+      <h2 className="text-2xl font-bold dark:text-slate-200 text-gray-900 mb-6">Support Us</h2>
 
       <form action={handlePaymentForm} className="space-y-6">
         
@@ -19,7 +19,7 @@ const PaymentForm = () => {
         <div>
           <label
             htmlFor="message"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium dark:text-slate-300 text-gray-700"
           >
             Message (Optional)
           </label>
@@ -27,7 +27,7 @@ const PaymentForm = () => {
             id="message"
             name="message"
             rows={3}
-            className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-1 p-3 block w-full dark:bg-gray-700 rounded-md  border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Leave a supportive message (optional)"
           />
         </div>
@@ -35,8 +35,8 @@ const PaymentForm = () => {
         {/* Custom Amount Input */}
         <div>
           <label
-            htmlFor="customAmount"
-            className="block text-sm font-medium text-gray-700"
+            htmlFor="amount"
+            className="block text-sm dark:text-slate-300 font-medium text-gray-700"
           >
             Amount
           </label>
@@ -49,7 +49,7 @@ const PaymentForm = () => {
               id="amount"
               name="amount"
               required
-              className="w-full h-12 px-6 rounded-lg border border-gray-300 shadow-sm transition duration-200"
+              className="w-full h-12 px-6 dark:bg-gray-700 rounded-lg border border-gray-300 shadow-sm transition duration-200"
               placeholder="Enter amount"
             />
             <input type="text" hidden name = "donarUserEmail" defaultValue = {session.user.email} />

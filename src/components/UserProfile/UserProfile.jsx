@@ -17,7 +17,7 @@ console.log("user data email is ",userData.email)
 
   return (
     <>
-      <div className=" bg-gray-50">
+      <div className=" bg-gray-50 dark:bg-gray-800">
         <div className="relative">
           <div className="w-full h-[40vh] md:h-[50vh] overflow-hidden">
             <img
@@ -48,7 +48,7 @@ console.log("user data email is ",userData.email)
 
         <div className="mt-5 max-w-4xl mx-auto px-4 py-2">
           <div className="text-center">
-            <h1 className="text-3xl md:text-4xl flex flex-row justify-center gap-4 font-bold text-gray-800 mb-2">
+            <h1 className="text-3xl md:text-4xl flex flex-row justify-center gap-4 font-bold dark:text-white text-gray-800 mb-2">
               {userData.name}{" "}
               {session.user.email === userData.email && (
                 <>
@@ -66,11 +66,11 @@ console.log("user data email is ",userData.email)
             </p>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
-              <div className="flex items-center text-gray-600">
+              <div className="flex items-center dark:text-slate-300 text-gray-600">
                 <MdEmail className="w-5 h-5 mr-2" />
                 <span>{userData.email}</span>
               </div>
-              <div className="flex items-center text-gray-600">
+              <div className="flex items-center dark:text-slate-300 text-gray-600">
                 <MdLocationOn className="w-5 h-5 mr-2" />
                 <span>{userData.location}</span>
               </div>
